@@ -1,13 +1,19 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.json", // Inherit settings from a base configuration
+
   "compilerOptions": {
-    "outDir": "../out-tsc/app",
-    "module": "commonjs",
-    "target": "es5",
-    "types": [
+    "outDir": "../out-tsc/app", // Set the output directory for compiled files
+    "module": "CommonJS",      // Use CommonJS module system for Node.js
+    "target": "ES5",           // Target ECMAScript 5 for wide compatibility
+    "types": [                 // Specify type declaration files for enhanced type checking
       "jasmine",
       "jasminewd2",
       "node"
     ]
-  }
+  },
+
+  "exclude": [
+    "test.ts",                // Exclude 'test.ts' from compilation
+    "**/*.spec.ts"            // Exclude any files with '.spec.ts' extension (test files)
+  ]
 }
