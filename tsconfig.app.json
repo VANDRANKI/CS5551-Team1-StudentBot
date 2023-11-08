@@ -1,11 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/app",
-    "types": []
+    "outDir": "../out-tsc/app",  // Specify the output directory for compiled files
+    "types": []  // Specify type declaration files for dependencies
   },
   "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
+    "test.ts",        // Exclude the 'test.ts' file
+    "**/*.spec.ts"    // Exclude any files with '.spec.ts' extension
   ]
 }
+
