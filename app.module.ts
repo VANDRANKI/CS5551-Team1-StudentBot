@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ModalModule } from "ngx-bootstrap";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ChatbotComponent } from "./chatbot/chatbot.component";
@@ -17,7 +16,6 @@ import { AgmCoreModule } from "@agm/core";
 import { AgmDirectionModule } from "agm-direction";
 import { MapComponent } from "./components/map/map.component";
 import { PathwayComponent } from "./pages/pathway/pathway.component";
-
 @NgModule({
   declarations: [
     AppComponent,
