@@ -5,15 +5,11 @@ from rasa_core.channels.channel import CollectingOutputChannel
 from flask import json
 from klein import Klein
 from rasa_core.utils import AvailableEndpoints
-
 logger = logging.getLogger(__name__)
-
-
 def request_parameters(request):
     if request.method.decode('utf-8', 'strict') == 'GET':
         return {
-            key.decode('utf-8', 'strict'): value[0].decode('utf-8',
-                                                           'strict')
+            key.decode('utf-8', 'strict'): value[0].decode('utf-8','strict')
             for key, value in request.args.items()}
     else:
         content = request.content.read()
@@ -24,8 +20,6 @@ def request_parameters(request):
                          "Error: {}. Request content: "
                          "'{}'".format(e, content))
             raise
-
-
 class Server:
     app = Klein()
 
@@ -45,18 +39,15 @@ class Server:
                         "Rasa Core server with out loaded model now. {}"
                         "".format(e))
             return None
-
     @app.route("/api/v1/status", methods=['GET'])
     def status(self, request):
         """Check if the server is running and responds with the status."""
         request.setHeader('Access-Control-Allow-Origin', '*')
         return json.dumps({'status': 'OK'})
-
     @app.route('/api/v1/<sender_id>/parse', methods=['GET', 'POST'])
     def parse(self, request, sender_id):
         request.setHeader('Content-Type', 'application/json')
         request_params = request_parameters(request)
-
         if 'query' in request_params:
             message = request_params.pop('query')
         elif 'q' in request_params:
@@ -73,7 +64,6 @@ class Server:
             logger.error("Caught an exception during "
                          "parse: {}".format(e), exc_info=1)
             return json.dumps({"error": "{}".format(e)})
-
     @app.route('/api/v1/<sender_id>/respond', methods=['GET', 'POST'])
     def respond(self, request, sender_id):
         request.setHeader('Content-Type', 'application/json')
@@ -96,8 +86,6 @@ class Server:
             logger.error("Caught an exception during "
                          "parse: {}".format(e), exc_info=1)
             return json.dumps({"error": "{}".format(e)})
- 
-
 if __name__ == "__main__":
     server = Server("models/dialogue/", RasaNLUInterpreter("models/current/nlu"))
     server.app.run("0.0.0.0", 8081)
