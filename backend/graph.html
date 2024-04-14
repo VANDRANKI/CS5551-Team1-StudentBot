@@ -15,57 +15,46 @@
         .node.invisible > rect {
             display: none;
         }
-
         .node.start > rect {
             fill: #7f7;
             rx: 30;
             ry: 18;
         }
-
         .node.end > rect {
             fill: #f77;
             rx: 30;
             ry: 18;
         }
-
         .node:not(.active) > rect, .node:not(.active) > .label {
             opacity: 0.4;
         }
-
         .edgePath:not(.active) path {
             opacity: 0.4;
         }
-
         .node.ellipsis > rect {
             fill: #CCC;
         }
-
         .node.intent > rect {
             fill: #7ff;
         }
-
         .node.dashed > rect {
             stroke-dasharray: 5;
         }
-
         text {
             font-weight: 300;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serf, serif;
             font-size: 14px;
             color: #1f1d1d;
         }
-
         .node rect {
             stroke: #444;
             fill: #fff;
             stroke-width: 1.5px;
         }
-
         .edgePath path {
             stroke: #333;
             stroke-width: 1.5px;
         }
-
         svg {
             position: fixed;
             top: 10px;
@@ -77,19 +66,15 @@
     <g></g>
 </svg>
 <script>
-
   function serveGraph() {
     let oldInputGraphValue;
-
     const url = 'visualization.dot';
     const refreshInterval = 500;
-
     // trigger a refresh by fetching an updated graph
     setInterval(function () {
       fetch(url).then(r => r.text()).then(dot => {
         document.getElementById('errormsg').innerHTML = '';
         if (oldInputGraphValue === dot) return;
-
         oldInputGraphValue = dot;
         drawGraph(dot);
       }).catch(err => {
@@ -98,7 +83,6 @@
       });
     }, refreshInterval);
   }
-
   function drawGraph(graph) {
     let g = graphlibDot.read(graph);
     // Set margins, if not present
@@ -120,19 +104,15 @@
       inner.attr("transform", d3.event.transform);
     });
   svg.call(zoom);
-
   // Create and configure the renderer
   const render = dagreD3.render();
-
   let isClient = false;
   isClient = true;
-
   if (isClient) {
     // Mark all nodes and their edges as active
     cssRules = document.styleSheets[0].cssRules;
     cssRules[3].style.opacity = 1;
     cssRules[4].style.opacity = 1;
-
     let graph;
     graph = `digraph  {
 0 [class="start active", fillcolor=green, fontsize=12, label=START, style=filled];
@@ -181,8 +161,6 @@
   } else {
     serveGraph();
   }
-
-
 </script>
 </body>
 </html>
